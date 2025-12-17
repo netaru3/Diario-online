@@ -2,6 +2,8 @@ import express from 'express'
 import {log} from './mongo.js'
 import {createServer} from 'http'
 import {Server} from 'socket.io'
+import dotenv from 'dotenv'
+dotenv.config()
 
 let app= express()
 const server= createServer(app)
@@ -317,4 +319,4 @@ IO.on("connection",function(socket){
 mensajestotal=""
     })})
 
-server.listen(3000)
+server.listen(process.env.PORT || 3000)
