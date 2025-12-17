@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario</title>
+</head>
+<body>
+    <h1>Diario personal</h1>
+    <input type="text" placeholder="Escribe lo que piensas", id="input">
+    <button onclick="enviarmensaje()" ></button>
+    <p id="mensaje"></p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const nombre= req.params.nombre
+        let socket= io()
+        function enviarmensaje(){
+            document.getElementById("mensaje").textContent+=document.getElementById("input").value
+            socket.emit("mensaje",{usuario:nombre,
+                mensaje: document.getElementById("input").value
+            })
+        }
+        console.log(nombre)
+
+    </script>
+</body>
+</html>
