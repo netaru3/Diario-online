@@ -140,7 +140,7 @@
 }).then(function(res){
    if(res.text()==="error en el inicio de sesión"){alert(res.text())
    }
-else{window.location.href=`http://localhost:3000/diario/${document.getElementById("usuario").value}`;
+else{window.location.href=`diario/${document.getElementById("usuario").value}`;
     socket.emit("html",function(){console.log(res)
         return res})
 }
