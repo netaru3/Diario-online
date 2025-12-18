@@ -7,6 +7,6 @@ Veo a muchos programadores que se extienden muchísimo en su readme hablando de 
 
 me da demasiada pereza explicarme y desarrollar todo, pero si tuviese que resumir todo mi desarrollo en una frase es: MALAS PRÁCTICAS
 
-hice todo mal D;
+hice todo mal, uno de los problemas que me apareció al hacer la página, es que si yo creaba la página "/diario/juan" todas las personas podían entrar a él, y no sé como autentificación de tokens así que hice una MUY mala práctica... Puse la contraseña como query de la url, de modo en que ahora solo podrán entrar a la página poniendo la contraseña. Es SUPER inseguro lo sé, pero es lo que se me ocurrió, mejor hacerlo malo que no hacer nada no?
 
 y bueno, es super obvio que usé claude.ai para estilizarlo y render como host
