@@ -142,7 +142,7 @@
 }).then(function(res){
     if(res==="error en el inicio de sesión"){alert(res)
    }
-else if(res==="ok"){window.location.href=`diario/${document.getElementById("usuario").value}`;
+else if(res==="ok"){window.location.href=`diario/${document.getElementById("usuario").value}?contraseña=${document.getElementById("contraseña").value}`;
     socket.emit("html",function(){console.log(res)
         return res})
 }
