@@ -53,8 +53,7 @@ app.post('/data/logeado',async function(req,res,next){
     let cuenta=await log.find({usuario:req.body.usuario,
         contraseña:req.body.contraseña
     })
-
-    console.log(cuenta[0].mensaje);
+;
     if(cuenta.length>0){ 
    return  res.send("ok")
     }
@@ -65,18 +64,22 @@ else{
 
 })
 let mensajestotal="querido diario:"
-app.get("/diario/:nombre",function(req,res){ 
-     async function obtenerlogs(){let cuenta1= await log.find({usuario: req.params.nombre })
+app.get("/diario/:nombre", async function(req,res){ 
+      async function obtenerlogs(){let cuenta1= await log.find({usuario: req.params.nombre })
     for(let logs of cuenta1){
         if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
             console.log(mensajestotal)
         }
     
 }
-return mensajestotal}
-
+return mensajestotal};
 obtenerlogs()
-    res.send(`<!DOCTYPE html>
+  if(req.query.contraseña===undefined){res.send("acceso denegado")}
+    let cuenta=await log.find({usuario:req.params.nombre,
+        contraseña:req.query.contraseña
+    })
+;
+    if(cuenta.length>0){ res.send(`<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -293,6 +296,15 @@ obtenerlogs()
     </script>
 </body>
 </html>`)
+   
+    }
+else{
+     res.send("error en el inicio de sesión")
+}
+   
+
+
+    
 })
 
 
