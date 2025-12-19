@@ -265,12 +265,16 @@ obtenerlogs()
     <script>
         const nombre = "${req.params.nombre}";
         console.log(nombre);
-        let socket = io(
-        {
-  query: {
-    contraseña: new URLSearchParams(location.search).get("contraseña")
-  }
-});
+     const params = new URLSearchParams(location.search);
+const contraseña = params.get("contraseña");
+
+if (!contraseña) {
+  alert("Sesión inválida");
+} else {
+  const socket = io({
+    query: { contraseña }
+  });
+}
         
         socket.on("mensajerespuesta", function(mensaje) {
             document.getElementById("mensaje").textContent += mensaje;
