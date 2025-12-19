@@ -58,8 +58,7 @@ app.get('/data',async function(req,res){
         root: import.meta.dirname
     })
     
-})
-let cuenta=[]
+})let cuenta=[]
 app.post('/data/logeado',async function(req,res,next){
     let cuenta=await log.find({usuario:req.body.usuario,
         contraseña:req.body.contraseña
@@ -74,8 +73,8 @@ else{
     
 
 })
-let mensajestotal="querido diario:"
-app.get("/diario/:nombre", async function(req,res){ 
+
+app.get("/diario/:nombre", async function(req,res){ let mensajetotal="querido diario:"
       async function obtenerlogs(){let cuenta1= await log.find({usuario: req.params.nombre })
     for(let logs of cuenta1){
         if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
@@ -282,7 +281,7 @@ await obtenerlogs()
 // Cliente
 const socket = io("https://pleasant-illumination-url.up.railway.app/", {
     withCredentials: true,
-    transports: ['polling', 'websocket'],
+    transports: ['polling'],
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionAttempts: 5
@@ -329,9 +328,6 @@ else{
     
 })
 
-
-
-IO.on("connection",function(socket){
     IO.engine.on("connection_error", (err) => {
   console.log("SOCKET ERROR:");
   console.log(err.req);
@@ -339,6 +335,10 @@ IO.on("connection",function(socket){
   console.log(err.message);
   console.log(err.context);
 });
+
+IO.on("connection",async function(socket){
+    
+
 
       socket.emit("mensajerespuesta",mensajestotal)
       
@@ -358,7 +358,6 @@ IO.on("connection",function(socket){
     
 
     socket.on("disconnect",function(){
-mensajestotal=""
     })})
 
 server.listen(process.env.PORT,function(){
