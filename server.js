@@ -20,7 +20,7 @@ const IO = new Server(server, {
     transports: ['polling']
 })
 app.use(express.json())
-
+let cuenta=[]
 app.use(express.urlencoded({ extended: true }))
 app.get('/',function(req,res){ 
     res.sendFile("registro1.html",{
@@ -58,7 +58,7 @@ app.get('/data',async function(req,res){
         root: import.meta.dirname
     })
     
-})let cuenta=[]
+})
 app.post('/data/logeado',async function(req,res,next){
     let cuenta=await log.find({usuario:req.body.usuario,
         contraseña:req.body.contraseña
