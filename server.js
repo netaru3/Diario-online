@@ -360,6 +360,6 @@ IO.on("connection",async function(socket){
     socket.on("disconnect",function(){
     })})
 
-server.listen(process.env.PORT,function(){
+server.listen(process.env.PORT || 3000,function(){
     console.log("escucuchando en el puerto "+process.env.PORT)
 })
