@@ -10,7 +10,7 @@ const server= createServer(app)
 // Servidor
 const IO = new Server(server, { 
     cors: {
-        origin: "https://diario-online.onrender.com",
+        origin: "https://pleasant-illumination-url.up.railway.app",
         methods: ["GET", "POST"],
         credentials: true
     },
@@ -280,7 +280,7 @@ await obtenerlogs()
 
 
 // Cliente
-const socket = io("https://diario-online.onrender.com", {
+const socket = io("https://pleasant-illumination-url.up.railway.app/", {
     withCredentials: true,
     transports: ['polling', 'websocket'],
     reconnection: true,
