@@ -74,7 +74,7 @@ app.get("/diario/:nombre", async function(req,res){
 }
 return mensajestotal};
 obtenerlogs()
-  if(req.query.contraseña===undefined){res.send("acceso denegado")}
+  if(req.query.contraseña===undefined){return res.send("acceso denegado")}
     let cuenta=await log.find({usuario:req.params.nombre,
         contraseña:req.query.contraseña
     })
