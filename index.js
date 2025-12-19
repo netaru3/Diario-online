@@ -265,7 +265,12 @@ obtenerlogs()
     <script>
         const nombre = "${req.params.nombre}";
         console.log(nombre);
-        let socket = io();
+        let socket = io(
+        {
+  query: {
+    contraseña: new URLSearchParams(location.search).get("contraseña")
+  }
+});
         
         socket.on("mensajerespuesta", function(mensaje) {
             document.getElementById("mensaje").textContent += mensaje;
