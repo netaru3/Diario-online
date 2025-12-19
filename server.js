@@ -74,7 +74,7 @@ else{
 
 })
 
-app.get("/diario/:nombre", async function(req,res){ let mensajetotal="querido diario:"
+app.get("/diario/:nombre", async function(req,res){ let mensajestotal="querido diario:"
       async function obtenerlogs(){let cuenta1= await log.find({usuario: req.params.nombre })
     for(let logs of cuenta1){
         if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
