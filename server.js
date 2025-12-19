@@ -361,4 +361,6 @@ IO.on("connection",function(socket){
 mensajestotal=""
     })})
 
-server.listen(process.env.PORT)
+server.listen(process.env.PORT,function(){
+    console.log("escucuchando en el puerto "+process.env.PORT)
+})
