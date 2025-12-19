@@ -272,7 +272,8 @@ if (!contraseña) {
   alert("Sesión inválida");
 } else {
   const socket = io({
-    query: { contraseña }
+    query: { contraseña },
+      transports: ["websocket"]
   });
 }
         
