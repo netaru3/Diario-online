@@ -7,14 +7,17 @@ dotenv.config()
 
 let app= express()
 const server= createServer(app)
+// Servidor
 const IO = new Server(server, { 
     cors: {
-        origin: ["https://diario-online.onrender.com", "http://localhost:3000"],
+        origin: "https://diario-online.onrender.com",
         methods: ["GET", "POST"],
-        credentials: true,
-        allowedHeaders: ["*"]
+        credentials: true
     },
-    transports: ['websocket', 'polling'] // Añadir esto
+    pingTimeout: 60000,
+    pingInterval: 25000,
+    upgradeTimeout: 30000,
+    transports: ['polling', 'websocket']
 })
 app.use(express.json())
 
@@ -276,10 +279,13 @@ await obtenerlogs()
   
 
 
-
-  const socket = io("https://diario-online.onrender.com", {
+// Cliente
+const socket = io("https://diario-online.onrender.com", {
     withCredentials: true,
-    transports: ['websocket', 'polling']
+    transports: ['polling', 'websocket'],
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionAttempts: 5
 });
 
         
