@@ -7,7 +7,11 @@ dotenv.config()
 
 let app= express()
 const server= createServer(app)
-const IO= new Server(server)
+const IO= new Server(server,{ cors: {
+    origin: "https://diario-online.onrender.com/",
+    methods: ["GET", "POST"],
+    credentials: true
+  }})
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
@@ -265,17 +269,14 @@ obtenerlogs()
     <script>
         const nombre = "${req.params.nombre}";
         console.log(nombre);
-     const params = new URLSearchParams(location.search);
-const contraseña = params.get("contraseña");
+  
 
-if (!contraseña) {
-  alert("Sesión inválida");
-} else {
-  const socket = io({
-    query: { contraseña },
-      transports: ["websocket"]
-  });
-}
+
+
+  const socket = io("https://diario-online.onrender.com/", {
+  withCredentials: true
+});
+
         
         socket.on("mensajerespuesta", function(mensaje) {
             document.getElementById("mensaje").textContent += mensaje;
