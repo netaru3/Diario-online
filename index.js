@@ -7,11 +7,15 @@ dotenv.config()
 
 let app= express()
 const server= createServer(app)
-const IO= new Server(server,{ cors: {
-    origin: "https://diario-online.onrender.com/",
-    methods: ["GET", "POST"],
-    credentials: true
-  }})
+const IO = new Server(server, { 
+    cors: {
+        origin: ["https://diario-online.onrender.com", "http://localhost:3000"],
+        methods: ["GET", "POST"],
+        credentials: true,
+        allowedHeaders: ["*"]
+    },
+    transports: ['websocket', 'polling'] // Añadir esto
+})
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
