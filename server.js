@@ -17,7 +17,7 @@ const IO = new Server(server, {
     pingTimeout: 60000,
     pingInterval: 25000,
     upgradeTimeout: 30000,
-    transports: ['polling', 'websocket']
+    transports: ['polling']
 })
 app.use(express.json())
 
