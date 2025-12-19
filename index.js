@@ -277,8 +277,9 @@ obtenerlogs()
 
 
 
-  const socket = io("https://diario-online.onrender.com/", {
-  withCredentials: true
+  const socket = io("https://diario-online.onrender.com", {
+    withCredentials: true,
+    transports: ['websocket', 'polling']
 });
 
         
