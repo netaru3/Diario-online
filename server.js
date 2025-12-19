@@ -332,6 +332,14 @@ else{
 
 
 IO.on("connection",function(socket){
+    IO.engine.on("connection_error", (err) => {
+  console.log("SOCKET ERROR:");
+  console.log(err.req);
+  console.log(err.code);
+  console.log(err.message);
+  console.log(err.context);
+});
+
       socket.emit("mensajerespuesta",mensajestotal)
       
        socket.on("mensaje",function(objeto){
