@@ -4,7 +4,6 @@ import {createServer} from 'http'
 import {Server} from 'socket.io'
 import dotenv from 'dotenv'
 dotenv.config()
- let mensajestotal="querido diario:"
 let app= express()
 const server= createServer(app)
 // Servidor
@@ -75,7 +74,8 @@ else{
 })
 
 app.get("/diario/:nombre", async function(req,res){
-      async function obtenerlogs(){let cuenta1= await log.find({usuario: req.params.nombre })
+      async function obtenerlogs(){let mensajestotal=""
+       let cuenta1= await log.find({usuario: req.params.nombre })
     for(let logs of cuenta1){
         if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
             console.log(mensajestotal)
@@ -340,9 +340,7 @@ IO.on("connection",async function(socket){
     
 
 
-      socket.emit("mensajerespuesta",mensajestotal,function(){
-       mensajestotal=""
-      })
+      socket.emit("mensajerespuesta",obtenerlogs())
       
        socket.on("mensaje",function(objeto){
         log.create({usuario: objeto.usuario ,
