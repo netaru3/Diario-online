@@ -87,6 +87,7 @@ else{
 
 })
 
+function retornador(x){return x}
 app.get("/diario/:nombre", async function(req,res){
      
 await obtenerlogs( req.params.nombre )
@@ -290,7 +291,8 @@ const socket = io("https://pleasant-illumination-url.up.railway.app/", {
     transports: ['polling'],
     reconnection: true,
     reconnectionDelay: 1000,
-    reconnectionAttempts: 5
+    reconnectionAttempts: 5,
+    auth:{nombre:nombre}
 });
 
         
@@ -343,10 +345,10 @@ else{
 });
 
 IO.on("connection",async function(socket){
-    
+    const nombre= socket.handshake.auth.nombre
 
 
-      socket.emit("mensajerespuesta",await obtenerlogs())
+      socket.emit("mensajerespuesta",await obtenerlogs(nombre))
       
        socket.on("mensaje",function(objeto){
         log.create({usuario: objeto.usuario ,
