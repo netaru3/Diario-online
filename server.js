@@ -20,6 +20,20 @@ const IO = new Server(server, {
 })
 app.use(express.json())
 let cuenta=[]
+
+//funciones
+
+ async function obtenerlogs(nombre){let mensajestotal=""
+       let cuenta1= await log.find({usuario:nombre})
+    for(let logs of cuenta1){
+        if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
+            console.log(mensajestotal)
+        }
+    
+}
+return mensajestotal};
+
+
 app.use(express.urlencoded({ extended: true }))
 app.get('/',function(req,res){ 
     res.sendFile("registro1.html",{
@@ -74,16 +88,8 @@ else{
 })
 
 app.get("/diario/:nombre", async function(req,res){
-      async function obtenerlogs(){let mensajestotal=""
-       let cuenta1= await log.find({usuario: req.params.nombre })
-    for(let logs of cuenta1){
-        if(logs.mensaje!==undefined && logs.mensaje!==null && logs.mensaje!==NaN){mensajestotal+=`\n${logs.mensaje}`
-            console.log(mensajestotal)
-        }
-    
-}
-return mensajestotal};
-await obtenerlogs()
+     
+await obtenerlogs( req.params.nombre )
   if(req.query.contraseña===undefined){return res.send("acceso denegado")}
     let cuenta=await log.find({usuario:req.params.nombre,
         contraseña:req.query.contraseña
@@ -340,7 +346,7 @@ IO.on("connection",async function(socket){
     
 
 
-      socket.emit("mensajerespuesta",obtenerlogs())
+      socket.emit("mensajerespuesta",await obtenerlogs())
       
        socket.on("mensaje",function(objeto){
         log.create({usuario: objeto.usuario ,
