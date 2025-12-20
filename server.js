@@ -41,7 +41,7 @@ app.get('/',function(req,res){
     })
 })
 
-app.post('/data',async function(req,res){
+app.post('/',async function(req,res){
        try{ if(req.body)
        { let cuenta=await log.find({usuario:req.body.usuario
     });
