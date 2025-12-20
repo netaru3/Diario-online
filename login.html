@@ -123,13 +123,12 @@
 
          <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io("https://pleasant-illumination-url.up.railway.app/", {
+        var socket = io("https://pleasant-illumination-url.up.railway.app/", {
     withCredentials: true,
-    transports: ['polling'],
+    transports: ['polling',"websocket"],
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionAttempts: 5,
-    auth:{nombre:nombre}
 });
           function enviar(){ socket.emit("usuario",{
              usuario: document.getElementById("usuario").value,
