@@ -340,7 +340,9 @@ IO.on("connection",async function(socket){
     
 
 
-      socket.emit("mensajerespuesta",mensajestotal)
+      socket.emit("mensajerespuesta",mensajestotal,function(){
+       mensajestotal=""
+      })
       
        socket.on("mensaje",function(objeto){
         log.create({usuario: objeto.usuario ,
@@ -358,7 +360,7 @@ IO.on("connection",async function(socket){
     
 
     socket.on("disconnect",function(){
-     mensajestotal=""
+     
     })})
 
 server.listen(process.env.PORT || 3000,function(){
